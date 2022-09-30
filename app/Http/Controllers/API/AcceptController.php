@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class AcceptController extends Controller
 {
-    public function accept_desainer($id_project,$id_desainer)
+    public function accept_desainer($id,$id_desainer)
     {
         $project = DB::table('project') 
-                    ->where('id_project', $id_project)
+                    ->where('id', $id)
                     ->update(['id_desainer', $id_desainer]);
         $count = Project::count();
         return response()->json(['status'=>'ok','totalResults'=>$count ,'project'=>$project]);
@@ -30,10 +30,10 @@ class AcceptController extends Controller
         }
     }
 
-    public function accept_konveksi($id_project,$id_konveksi)
+    public function accept_konveksi($id,$id_konveksi)
     {
         $project = DB::table('project') 
-                    ->where('id_project', $id_project)
+                    ->where('id', $id)
                     ->update(['id_konveksi', $id_konveksi]);
         $count = Project::count();
         return response()->json(['status'=>'ok','totalResults'=>$count ,'project'=>$project]);
