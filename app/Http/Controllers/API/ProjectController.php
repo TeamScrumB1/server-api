@@ -7,7 +7,6 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 class ProjectController extends Controller
 {
 
@@ -20,7 +19,7 @@ class ProjectController extends Controller
     public function riwayat($id_user)
     {
         $project = DB::table('project')
-                    ->select('project.id_user','project.judul','project.kebutuhan','project.biaya','project.lampiran', 'project.created_ad','project.updated_at')
+                    ->select('project.id_user','project.judul','project.kebutuhan','project.biaya','project.lampiran', 'project.created_at','project.updated_at')
                     ->where('project.id_user', $id_user)
                     ->get();
         $count = Project::count();
