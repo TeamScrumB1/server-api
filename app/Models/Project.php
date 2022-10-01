@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    use HasFactory;
+
     protected $guarded = [];
     protected $table ='project';
+    protected $primaryKey = 'id';
     protected $fillable =[
         'id_user',
         'judul',
@@ -17,6 +20,7 @@ class Project extends Model
         'lampiran',
         'size',
         'link_gambar',
+        'id_desainer',
+        'id_konveksi',
     ];
-
 }
