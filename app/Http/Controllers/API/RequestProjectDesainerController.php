@@ -22,7 +22,6 @@ class RequestProjectDesainerController extends Controller
         $validator = Validator::make($request->all(), [
             'id_project' => 'required',
             'id_desainer' => 'required',
-            'status' => 'required',
         ]);
 
         if($validator->fails()) {
