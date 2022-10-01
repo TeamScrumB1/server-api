@@ -39,6 +39,12 @@ Route::post('store-file', 'App\Http\Controllers\API\DocumentController@store');
 Route::get('preorder/{id_user}', 'App\Http\Controllers\API\ProjectController@riwayat');
 Route::get('get-user/{username}', 'App\Http\Controllers\API\UserController@getUser');
 
+//Request Project
+Route::get('requestProjectDesainer', 'App\Http\Controllers\API\RequestProjectDesainerController@index');
+Route::post('createRequestProjectDesainer', 'App\Http\Controllers\API\RequestProjectDesainerController@store');
+Route::get('requestProjectKonveksi', 'App\Http\Controllers\API\RequestProjectKonveksiController@index');
+Route::post('createRequestProjectKonveksi', 'App\Http\Controllers\API\RequestProjectKonveksiController@store');
+
 Route::put('accept_desainer/{id}/{id_desainer}', 'App\Http\Controllers\API\AcceptController@accept_desainer');
 Route::put('accept_konveksi/{id}/{id_konveksi}', 'App\Http\Controllers\API\AcceptController@accept_konveksi');
 // Route::post('order', 'App\Http\Controllers\API\OrderController@store');
