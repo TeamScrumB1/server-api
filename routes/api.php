@@ -45,8 +45,10 @@ Route::post('createRequestProjectDesainer', 'App\Http\Controllers\API\RequestPro
 Route::get('requestProjectKonveksi', 'App\Http\Controllers\API\RequestProjectKonveksiController@index');
 Route::post('createRequestProjectKonveksi', 'App\Http\Controllers\API\RequestProjectKonveksiController@store');
 
-Route::put('accept_desainer/{id}/{id_desainer}', 'App\Http\Controllers\API\AcceptController@accept_desainer');
-Route::put('accept_konveksi/{id}/{id_konveksi}', 'App\Http\Controllers\API\AcceptController@accept_konveksi');
+//Accept Desainer Konveksi
+Route::put('accept_desainer/{id}', 'App\Http\Controllers\API\AcceptController@accept_desainer');
+Route::put('accept_konveksi/{id}', 'App\Http\Controllers\API\AcceptController@accept_konveksi');
+
 // Route::post('order', 'App\Http\Controllers\API\OrderController@store');
 // Route::get('order', 'App\Http\Controllers\API\OrderController@index');
 // Route::post('order', 'OrderController@store');
