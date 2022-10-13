@@ -27,7 +27,12 @@ Route::resource('produk', App\Http\Controllers\API\ProdukController::class);
 Route::resource('desainer', App\Http\Controllers\API\DesainerController::class);
 Route::resource('project', App\Http\Controllers\API\ProjectController::class);
 Route::resource('order', App\Http\Controllers\API\OrderController::class);
-Route::resource('user', App\Http\Controllers\API\UserController::class);
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::post('login', [ApiController::class, 'login']);
 
 // route khusus
 Route::get('produk_desc_rating', 'App\Http\Controllers\API\ProdukController@desc_rating');
@@ -38,7 +43,10 @@ Route::get('product_filter_category/{nama_kategori}', 'App\Http\Controllers\API\
 Route::post('store-file', 'App\Http\Controllers\API\DocumentController@store');
 Route::get('preorder/{id_user}', 'App\Http\Controllers\API\ProjectController@riwayat');
 Route::get('get-user/{username}', 'App\Http\Controllers\API\UserController@getUser');
-
+Route::get('pengalaman_desainer', 'App\Http\Controllers\API\PengalamanDesainerController@index');
+Route::get('pengalaman_konveksi', 'App\Http\Controllers\API\PengalamanKonveksiController@index');
+Route::get('atasan', 'App\Http\Controllers\API\AtasanController@index');
+Route::get('bawaham', 'App\Http\Controllers\API\BawahanController@index');
 //Request Project
 Route::get('requestProjectDesainer', 'App\Http\Controllers\API\RequestProjectDesainerController@index');
 Route::post('createRequestProjectDesainer', 'App\Http\Controllers\API\RequestProjectDesainerController@store');

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class User2 extends Model
 {
-    protected $guarded = [];
-    protected $table ='user';
-    protected $fillable =['nama','username','email','password','level'];
+    use HasFactory, Notifiable;
 
-    use HasFactory;
+    protected $table = 'user';
+    protected $primaryKey = 'id';
+    protected $fillable =['nama','username','email','password','api_token','level'];
 }
