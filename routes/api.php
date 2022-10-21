@@ -29,6 +29,7 @@ Route::resource('produk', App\Http\Controllers\API\ProdukController::class);
 Route::resource('desainer', App\Http\Controllers\API\DesainerController::class);
 Route::resource('project', App\Http\Controllers\API\ProjectController::class);
 Route::resource('order', App\Http\Controllers\API\OrderController::class);
+Route::resource('user', App\Http\Controllers\API\UserController::class);
 Route::resource('keranjang', App\Http\Controllers\API\KeranjangController::class);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -46,7 +47,7 @@ Route::get('document', 'App\Http\Controllers\API\DocumentController@index');
 Route::get('product_filter_category/{nama_kategori}', 'App\Http\Controllers\API\ProdukController@filter_kategori');
 Route::post('store-file', 'App\Http\Controllers\API\DocumentController@store');
 Route::get('preorder/{id_user}', 'App\Http\Controllers\API\ProjectController@riwayat');
-Route::post('get-user', 'App\Http\Controllers\API\UserController@getUser');
+Route::get('get-user/{username}', 'App\Http\Controllers\API\UserController@getUser');
 Route::get('pengalaman_desainer', 'App\Http\Controllers\API\PengalamanDesainerController@index');
 Route::get('pengalaman_konveksi', 'App\Http\Controllers\API\PengalamanKonveksiController@index');
 Route::get('atasan', 'App\Http\Controllers\API\AtasanController@index');

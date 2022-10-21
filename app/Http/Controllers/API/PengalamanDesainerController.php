@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pengalaman_Desainer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PengalamanDesainerController extends Controller
 {
@@ -14,7 +16,9 @@ class PengalamanDesainerController extends Controller
      */
     public function index()
     {
-        //
+        $pengalaman = Pengalaman_Desainer::get();
+        $count = Pengalaman_Desainer::count();
+        return response()->json(['status'=>'ok','totalResults'=>$count ,'desainer'=>$pengalaman]);
     }
 
     /**

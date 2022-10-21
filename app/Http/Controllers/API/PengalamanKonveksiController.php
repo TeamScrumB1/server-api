@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pengalaman_Konveksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PengalamanKonveksiController extends Controller
 {
@@ -14,7 +16,9 @@ class PengalamanKonveksiController extends Controller
      */
     public function index()
     {
-        //
+        $pengalaman = Pengalaman_Konveksi::get();
+        $count = Pengalaman_Konveksi::count();
+        return response()->json(['status'=>'ok','totalResults'=>$count ,'desainer'=>$pengalaman]);
     }
 
     /**
