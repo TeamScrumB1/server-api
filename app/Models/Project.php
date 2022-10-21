@@ -12,7 +12,7 @@ class Project extends Model
     protected $guarded = [];
     protected $table ='project';
     protected $primaryKey = 'id';
-    protected $fillable =[
+    protected $fillable = [
         'id_user',
         'judul',
         'kebutuhan',
