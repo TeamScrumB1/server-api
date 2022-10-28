@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -14,7 +15,7 @@ class ApiController extends Controller
         if ($login) {
             $user = Auth::user();
             $user->api_token = Str::random(100);
-            $user->save();
+            // $user->save();
             // $user->makeVisible('api_token');
 
             return response()->json([

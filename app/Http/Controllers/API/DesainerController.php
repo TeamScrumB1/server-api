@@ -56,8 +56,8 @@ class DesainerController extends Controller
  
     public function destroy(Desainer $desainer)
     {
-     $desainer->delete();
- 
-     return response()->json('Berhasil Delete', 204);
+        $desainer->delete();
+    
+        return response()->json('Berhasil Delete', 204);
     }
  }
