@@ -9,7 +9,6 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
     protected $table ='project';
     protected $primaryKey = 'id';
     protected $fillable = [

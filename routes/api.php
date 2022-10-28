@@ -36,7 +36,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', [ApiController::class, 'login']);
+// Route::post('login', [ApiController::class, 'login']);
 Route::post('user', 'App\Http\Controllers\API\UserController@store');
 
 // route khusus
@@ -63,7 +63,6 @@ Route::post('createRequestProjectKonveksi', 'App\Http\Controllers\API\RequestPro
 Route::put('accept_desainer/{id}', 'App\Http\Controllers\API\AcceptController@accept_desainer');
 Route::put('accept_konveksi/{id}', 'App\Http\Controllers\API\AcceptController@accept_konveksi');
 
-// Route::post('order', 'App\Http\Controllers\API\OrderController@store');
-// Route::get('order', 'App\Http\Controllers\API\OrderController@index');
-// Route::post('order', 'OrderController@store');
-// Route::get('order', OrderController::class,'store');
+//Order
+Route::post('coba_order', 'App\Http\Controllers\API\OrderController2@store');
+

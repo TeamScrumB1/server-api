@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\PostResource;
 
 class OrderController extends Controller
 {   
@@ -18,16 +18,12 @@ class OrderController extends Controller
     
     public function store(Request $request)
     {
-        //validate data
         $validator = Validator::make($request->all(), [
             'id_user' => 'required',
             'judul' => 'required',
             'kebutuhan' => 'required',
             'biaya' => 'required',
             'lampiran' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'size' => 'required',
-            'link_gambar' => 'required',
-            'created_at' => 'required',
         ]);
 
         if($validator->fails()) {
@@ -38,19 +34,19 @@ class OrderController extends Controller
             ],401);
 
         } else {
-            $lampiran = $request->file('lampiran')->store('lampiran','public');
-            //$lampiran->storeAs('public/image_project', $lampiran->hashName());    
-          
+            $image = $request->file('lampiran');
+            $image->storeAs('public/image_project', $image->hashName());
+            $size = $request->file('lampiran')->getSize();
+            $total_size = number_format($size / 1048576,2); //MB
 
-            $post = Order::create([
+            $post = Project::create([ 
                 'id_user' => $request->input('id_user'), 
                 'judul' => $request->input('judul'), 
                 'kebutuhan' => $request->input('kebutuhan'), 
                 'biaya' => $request->input('biaya'), 
-                'lampiran' => $lampiran,
-                'size' => $request->input('size'), 
-                'link_gambar' => $request->input('link_gambar'), 
-                'created_at' => $request->input(time()), 
+                'lampiran' => $image->hashName(),
+                'size' => $total_size,
+                'link_gambar' => 'https://fashionizt.yufagency.com/images/'.$image->hashName(), 
             ]);
 
             if ($post) {
@@ -61,7 +57,7 @@ class OrderController extends Controller
             } else {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Data Input Failed',
+                    'message' => 'Preorder Failed',
                 ], 401);
             }
         }
