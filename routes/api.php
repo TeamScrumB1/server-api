@@ -63,6 +63,4 @@ Route::post('createRequestProjectKonveksi', 'App\Http\Controllers\API\RequestPro
 Route::put('accept_desainer/{id}', 'App\Http\Controllers\API\AcceptController@accept_desainer');
 Route::put('accept_konveksi/{id}', 'App\Http\Controllers\API\AcceptController@accept_konveksi');
 
-//Order
-Route::post('coba_order', 'App\Http\Controllers\API\OrderController2@store');
 
