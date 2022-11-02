@@ -46,7 +46,7 @@ class OrderController extends Controller
                 'biaya' => $request->input('biaya'), 
                 'lampiran' => $image->hashName(),
                 'size' => $total_size,
-                'link_gambar' => 'https://fashionizt.yufagency.com/images/'.$image->hashName(), 
+                'link_gambar' => 'https://api.yufagency.com/public/image_project/'.$image->hashName(), 
             ]);
 
             if ($post) {
