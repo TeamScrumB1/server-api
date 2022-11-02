@@ -47,9 +47,56 @@ class ProdukController extends Controller
  
     public function store(Request $request)
     {
-        $produk = Produk::create($request->all());
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'img_produk' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'img_processing' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'harga' => 'required',
+            'rating' => 'required',
+            'deskripsi' => 'required',
+            'id_kategori' => 'required',
+            'id_desainer' => 'required',
+            'id_konveksi' => 'required',
+        ]);
 
-        return response()->json($produk, 201);
+        if($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please Fill Out The Entire Form!',
+                'data'    => $validator->errors()
+            ],401);
+
+        } else {
+            $image1 = $request->file('img_produk');
+            $image1->storeAs('public/image_product', $image1->hashName());
+
+            $image2 = $request->file('img_processing');
+            $image2->storeAs('public/image_processing', $image2->hashName());
+
+            $post = Produk::create([ 
+                'nama' => $request->input('nama'), 
+                'img_produk' => 'https://api.yufagency.com/public/image_product/'.$image1->hashName(), 
+                'img_processing' => 'https://api.yufagency.com/public/image_processing/'.$image2->hashName(), 
+                'harga' => $request->input('harga'), 
+                'rating' => $request->input('rating'), 
+                'deskripsi' => $request->input('deskripsi'), 
+                'id_kategori' => $request->input('id_kategori'),
+                'id_konveksi' => $request->input('id_konveksi'),
+                'id_desainer' => $request->input('id_desainer'),
+            ]);
+
+            if ($post) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Upload Product Successful',
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Upload Product Failed',
+                ], 401);
+            }
+        }
     }
  
     public function show(Produk $produk)
