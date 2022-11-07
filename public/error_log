@@ -1,0 +1,1 @@
+[16-Oct-2022 21:33:02 UTC] PHP Fatal error:  Trait "App\Models\Notifiable" not found in /home/yufagenc/api.yufagency.com/app/Models/User2.php on line 8
