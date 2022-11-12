@@ -26,22 +26,49 @@ class ProdukController extends Controller
         $produk = DB::table('produk')
                 ->join('desainer', 'produk.id_desainer', '=','desainer.id')
                 ->join('kategori', 'desainer.id_kategori', '=','kategori.id')
-                ->select('produk.id as id','produk.nama as nama','produk.img_produk as img_produk','produk.harga as harga','produk.rating as rating','produk.deskripsi as deskripsi','produk.id_desainer as id_desainer','desainer.img_profil as img_profil','desainer.nama as nama_desainer','desainer.bio as bio_desainer','desainer.rating as rating_desainer','desainer.link_wa as link_wa','desainer.link_porto as link_porto','desainer.jmlh_project as jmlh_project','kategori.nama_kategori as kategori')
+                ->select('produk.id as id','produk.nama as nama','produk.img_produk as img_produk','produk.img_processing as img_processing','produk.harga as harga','produk.rating as rating','produk.deskripsi as deskripsi','produk.id_desainer as id_desainer','desainer.img_profil as img_profil','desainer.nama as nama_desainer','desainer.bio as bio_desainer','desainer.rating as rating_desainer','desainer.link_wa as link_wa','desainer.link_porto as link_porto','desainer.jmlh_project as jmlh_project','kategori.nama_kategori as kategori')
                 ->orderBy('produk.rating', 'DESC')
                 ->get();
-        $count = Produk::count();
+        $count = $produk->count();
         return response()->json(['status'=>'ok','totalResults'=>$count ,'produk'=>$produk]);
     }
 
-    public function filter_kategori($nama_kategori)
+    public function filter_kategori_id($id_kategori)
     {
         $produk = DB::table('produk')
                 ->join('desainer', 'produk.id_desainer', '=','desainer.id')
                 ->join('kategori', 'desainer.id_kategori', '=','kategori.id')
-                ->select('produk.id as id','produk.nama as nama','produk.img_produk as img_produk','produk.harga as harga','produk.rating as rating','produk.deskripsi as deskripsi','produk.id_desainer as id_desainer','desainer.img_profil as img_profil','desainer.nama as nama_desainer','desainer.bio as bio_desainer','desainer.rating as rating_desainer','desainer.link_wa as link_wa','desainer.link_porto as link_porto','desainer.jmlh_project as jmlh_project','kategori.nama_kategori as kategori')
-                ->where('produk.nama_kategori', $nama_kategori)
+                ->select('produk.id as id','produk.nama as nama','produk.img_produk as img_produk','produk.img_processing as img_processing','produk.harga as harga','produk.rating as rating','produk.deskripsi as deskripsi','produk.id_desainer as id_desainer','desainer.img_profil as img_profil','desainer.nama as nama_desainer','desainer.bio as bio_desainer','desainer.rating as rating_desainer','desainer.link_wa as link_wa','desainer.link_porto as link_porto','desainer.jmlh_project as jmlh_project','produk.id_kategori as id_kategori')
+                ->where('produk.id_kategori', $id_kategori)
                 ->get();
-        $count = Produk::count();
+        $count = $produk->count();
+        return response()->json(['status'=>'ok','totalResults'=>$count ,'produk'=>$produk]);
+    }
+
+    public function filter_kategori_nama($nama_kategori)
+    {
+        if($nama_kategori == 'Kemeja')
+            $id_kategori = 1;
+        elseif($nama_kategori == 'Rok')
+            $id_kategori = 2;
+        elseif($nama_kategori == 'Celana')
+            $id_kategori = 3;
+        elseif($nama_kategori == 'Gaun')
+            $id_kategori = 4;
+        elseif($nama_kategori == 'Jaket')
+            $id_kategori = 5;
+        elseif($nama_kategori == 'Kaos')
+            $id_kategori = 6;
+        else
+            $id_kategori = 0;
+
+        $produk = DB::table('produk')
+                ->join('desainer', 'produk.id_desainer', '=','desainer.id')
+                ->join('kategori', 'desainer.id_kategori', '=','kategori.id')
+                ->select('produk.id as id','produk.nama as nama','produk.img_produk as img_produk','produk.img_processing as img_processing','produk.harga as harga','produk.rating as rating','produk.deskripsi as deskripsi','produk.id_desainer as id_desainer','desainer.img_profil as img_profil','desainer.nama as nama_desainer','desainer.bio as bio_desainer','desainer.rating as rating_desainer','desainer.link_wa as link_wa','desainer.link_porto as link_porto','desainer.jmlh_project as jmlh_project','produk.id_kategori as id_kategori')
+                ->where('produk.id_kategori', $id_kategori)
+                ->get();
+        $count = $produk->count();
         return response()->json(['status'=>'ok','totalResults'=>$count ,'produk'=>$produk]);
     }
  
@@ -75,8 +102,8 @@ class ProdukController extends Controller
 
             $post = Produk::create([ 
                 'nama' => $request->input('nama'), 
-                'img_produk' => 'https://api.yufagency.com/public/image_product/'.$image1->hashName(), 
-                'img_processing' => 'https://api.yufagency.com/public/image_processing/'.$image2->hashName(), 
+                'img_produk' => 'https://api.yufagency.com/storage/image_product/'.$image1->hashName(), 
+                'img_processing' => 'https://api.yufagency.com/storage/image_processing/'.$image2->hashName(), 
                 'harga' => $request->input('harga'), 
                 'rating' => $request->input('rating'), 
                 'deskripsi' => $request->input('deskripsi'), 
