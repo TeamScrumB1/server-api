@@ -40,20 +40,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('user', 'App\Http\Controllers\API\UserController@store');
 
 // route khusus
-Route::get('produk_desc_rating', 'App\Http\Controllers\API\ProdukController@desc_rating');
 Route::get('konveksi_desc_rating', 'App\Http\Controllers\API\KonveksiController@desc_rating');
 Route::get('desainer_desc_rating', 'App\Http\Controllers\API\DesainerController@desc_rating');
 Route::get('document', 'App\Http\Controllers\API\DocumentController@index');
-Route::get('product_filter_category/{nama_kategori}', 'App\Http\Controllers\API\ProdukController@filter_kategori');
 Route::post('store-file', 'App\Http\Controllers\API\DocumentController@store');
-Route::get('preorder/{id_user}', 'App\Http\Controllers\API\ProjectController@riwayat');
 Route::get('get-user/{username}', 'App\Http\Controllers\API\UserController@getUser');
 Route::get('pengalaman_desainer', 'App\Http\Controllers\API\PengalamanDesainerController@index');
 Route::get('pengalaman_konveksi', 'App\Http\Controllers\API\PengalamanKonveksiController@index');
 Route::get('atasan', 'App\Http\Controllers\API\AtasanController@index');
 Route::get('bawahan', 'App\Http\Controllers\API\BawahanController@index');
 
+//Produk
+Route::get('produk_desc_rating', 'App\Http\Controllers\API\ProdukController@desc_rating');
+Route::get('filter_category_id/{id_kategori}', 'App\Http\Controllers\API\ProdukController@filter_kategori_id');
+Route::get('filter_category_nama/{nama_kategori}', 'App\Http\Controllers\API\ProdukController@filter_kategori_nama');
+Route::post('upload_produk', 'App\Http\Controllers\API\ProdukController@store');
+
 //Project
+Route::get('preorder/{id_user}', 'App\Http\Controllers\API\ProjectController@riwayat');
 Route::get('requestProjectDesainer', 'App\Http\Controllers\API\RequestProjectDesainerController@index');
 Route::post('createRequestProjectDesainer', 'App\Http\Controllers\API\RequestProjectDesainerController@store');
 Route::get('requestProjectKonveksi', 'App\Http\Controllers\API\RequestProjectKonveksiController@index');
