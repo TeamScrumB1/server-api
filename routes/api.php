@@ -50,6 +50,12 @@ Route::get('pengalaman_konveksi', 'App\Http\Controllers\API\PengalamanKonveksiCo
 Route::get('atasan', 'App\Http\Controllers\API\AtasanController@index');
 Route::get('bawahan', 'App\Http\Controllers\API\BawahanController@index');
 
+//Sign Up
+Route::get('list_akun_konveksi', 'App\Http\Controllers\API\KonveksiAkunController@index');
+Route::post('signup_konveksi', 'App\Http\Controllers\API\KonveksiAkunController@store');
+Route::get('list_akun_desainer', 'App\Http\Controllers\API\DesainerAkunController@index');
+Route::post('signup_desainer', 'App\Http\Controllers\API\DesainerAkunController@store');
+
 //Produk
 Route::get('produk_desc_rating', 'App\Http\Controllers\API\ProdukController@desc_rating');
 Route::get('filter_category_id/{id_kategori}', 'App\Http\Controllers\API\ProdukController@filter_kategori_id');
